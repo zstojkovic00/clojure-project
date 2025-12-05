@@ -386,3 +386,53 @@
 ;; sada je akumulator 55 a nema vise elemenata i to je vraceno
 ;; akumulator mu ne treba, moze i bez akumulatora
 (/ 6 3)
+
+
+(reduce (fn [acc e] (max acc e) )[1 -1 6])
+(apply max [1 -1 6])
+;; znaci prihvata akumulator i element, akumulator je startna vrednost u body-u definisem step i posle toga posaljem sekvencu.
+;; Vi mozete preko reduca da implementiram map
+;; radi isto sto radi map ali u to vraca count
+
+;;
+
+;; (reduce fn start sequence)
+;; Akumulator je rezultat ono sto nosis kroz iteracije
+;; trenutni element
+
+(reduce (fn [[sum cnt] e] [(+ sum e) (inc cnt)])
+        [0 0]
+        [1 2 3])
+
+;; [0 0]
+;; [+ 1 0) (inc 0)
+;; 1. [1 1]
+;; 2. [cnt sum] = cnt = 1, sum = 1;
+;; (+ 1 2) (inc 1)
+;; [3 2]
+
+;; [0 0] je akumulator to je vektor sa 2 broja
+;; Destrukturiranje [cnt sum], ovo znaci uzmi vektor akumulator i izvuci mi prvi element u cnt i drugi u sum
+;; E je trenutni element iz [1 2 3] redom
+
+;; povratna vrednost je [(+ sum e) (inc cnt)] - Vraca novi vektor (novi akumulator sa 2 vrednosti
+
+;; Ako je pocetni akumulator [0 0] i prvi element je 1 sta ce biti nivoi akumulator nakon prvog koraka [1, 1]
+;; sum i cnt
+;;
+
+(map str/upper-case ["a" "b" "c"])
+
+
+(reduce
+  (fn [acc e] (conj acc (str/upper-case e)))
+  []
+  ["a" "b" "c"])
+
+(reduce
+  (fn [acc e]
+    (conj acc (str e "nesto")))
+  []
+  ["a" "b" "c"]
+  )
+
