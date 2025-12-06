@@ -1,0 +1,5 @@
+Ideja seminarskog je da se napravi neki log storage poput elasticsearch, cassandra (lsm tree) koji poseduje fuzzy search (cirilica - latinica)
+izvori: lsm tree: https://www.cs.umb.edu/~poneil/lsmtree.pdf
+Mozda time series database za CDR rekorde..
+
+
